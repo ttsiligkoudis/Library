@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Author>
+@using Library.Helpers
+@inject ISession Session
+@inject IUserAccess UserAccess
+@{
+    ViewBag.Title = "Authors";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var customer = Session.GetCustomer();
+}
+<h2>@ViewBag.Title</h2>
+@if (UserAccess.IsAdmin(customer))
+{
+    @Html.ActionLink("Create", "Create", "Authors", "", new { @class = "btn btn-primary" })
+}
+@if (!Model.Any())
+{
+    <p><br>You don't have any Customer registered yet!</p>
+}
+else
+{
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Name)</th>
+                <th>@Html.DisplayNameFor(model => model.Age)</th>
+                <th>@Html.DisplayNameFor(model => model.BirthPlace)</th>
+                <th>@Html.DisplayNameFor(model => model.BooksReleased)</th>
+                @if (UserAccess.IsAdmin(customer))
+                {
+                    <th class="col-lg-1"></th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var author in Model)
+            {
+                <tr>
+                    @if (UserAccess.IsAdmin(customer))
+                    {
+                        <td>@Html.ActionLink(author.Name, "Edit", "Authors", new { id = author.Id }, null)</td>
+                    }
+                    else
+                    {
+                        <td>@author.Name</td>
+                    }
+                    <td>@author.Age</td>
+                    <td>@author.BirthPlace</td>
+                    <td>@author.BooksReleased</td>
+                    @if (UserAccess.IsAdmin(customer))
+                    {
+                        <td>@Html.ActionLink("Delete", "Delete", "Authors", new { id = author.Id }, new { @class = "btn btn-delete btn-primary", id = "btn-delete" })</td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+

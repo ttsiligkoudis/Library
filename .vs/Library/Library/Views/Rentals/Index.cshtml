@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Library.Models.Rental>
+
+@{
+    ViewBag.Title = "Rentals";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+@Html.ActionLink("Create", "Create", "Rentals", "", new { @class = "btn btn-primary" })
+@if (!Model.Any())
+{
+    <p><br>You don't have any orders registered yet!</p>
+}
+else
+{
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Customer</th>
+                <th>Book</th>
+                <th>Rented Date</th>
+                <th>Returned</th>
+                <th>Returned Dated</th>
+                <th class="col-lg-1"></th>
+                <th class="col-lg-1"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var rental in Model)
+            {
+                <tr>
+                    <td>@rental.Customer.Name</td>
+                    <td>@rental.Book.Description</td>
+                    <td>@rental.RentDate</td>
+                    <td>@rental.Returned</td>
+                    <td>@rental.ReturnDate</td>
+                    <td>@Html.ActionLink("Details", "Edit", "Rentals", new { id = rental.Id }, new { @class = "btn btn-primary" })</td>
+                    <td>@Html.ActionLink("Delete", "Delete", "Rentals", new { id = rental.Id }, new { @class = "btn btn-primary btn-delete", id = "btn-delete" })</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

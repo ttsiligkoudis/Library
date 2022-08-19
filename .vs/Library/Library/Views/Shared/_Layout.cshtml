@@ -1,0 +1,89 @@
+﻿@using Library.Helpers
+@inject ISession Session
+@inject IUserAccess UserAccess
+@{
+    var customer = Session.GetCustomer();
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewBag.Title - My ASP.NET App</title>
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/bootstrap.css" />
+    <script src="~/lib/jquery/jquery.js"></script>
+    <script src="~/lib/jquery-validate/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    <script src="~/lib/bootstrap/js/bootstrap.js"></script>
+</head>
+<body>
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            @Html.ActionLink("Library", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                @if (UserAccess.IsCustomer(customer))
+                {
+                    if (UserAccess.IsAdmin(customer))
+                    {
+                        <li>@Html.ActionLink("Customers", "Index", "Customers")</li>
+                        <li>@Html.ActionLink("Users", "Index", "Users")</li>
+                    }
+                    <li>@Html.ActionLink("Rentals", "Index", "Rentals")</li>
+                    <li>@Html.ActionLink("Authors", "Index", "Authors")</li>
+                }
+                <li>@Html.ActionLink("Books", "Index", "Books")</li>
+                <li>@Html.ActionLink("Rent a Book", "Create", "Rentals")</li>
+            </ul>
+            @if (UserAccess.IsCustomer(customer))
+            {
+                using (Html.BeginForm("Logout", "Users", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            @Html.ActionLink("Hello " + customer.Name + "!", "Details", "Users", new { id = customer.User.Id }, null)
+                        </li>
+                        <li>@Html.ActionLink("Log out", "Logout", "Users", null, new { id = "logoutForm" })</li>
+                    </ul>
+                }
+            }
+            else
+            {
+                <ul class="nav navbar-nav navbar-right">
+                    <li>@Html.ActionLink("Register", "Register", "Users", null, new { id = "registerLink" })</li>
+                    <li>@Html.ActionLink("Log in", "Login", "Users", null, new { id = "loginLink" })</li>
+                </ul>
+            }
+            <ul class="nav navbar-nav navbar-right">
+                @*@if (UserAccess.IsAdmin(customer))
+                {
+                    <li><a href="https://localhost:44384/swagger/">ConsumerAPI</a></li>
+                }*@
+                <li>@Html.ActionLink("About us", "About", "Home")</li>
+                <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="container body-content">
+    @RenderBody()
+    <hr />
+    <footer>
+        <p>&copy; @DateTime.Now.Year - EShop</p>
+    </footer>
+</div>
+    
+@RenderSection("Scripts", required: false)
+</body>
+</html>
+

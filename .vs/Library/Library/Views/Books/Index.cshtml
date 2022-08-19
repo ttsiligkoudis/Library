@@ -1,0 +1,68 @@
+﻿@using Library.Helpers
+@model IEnumerable<Library.ViewModels.BookViewModel>
+@inject ISession Session
+@inject IUserAccess UserAccess
+@{
+    ViewBag.Title = "Book";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var customer = Session.GetCustomer();
+}
+
+<h2>@ViewBag.Title</h2>
+@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+@if (UserAccess.IsAdmin(customer))
+{
+    @Html.ActionLink("Create", "Create", "Books", "", new { @class = "btn btn-primary" })
+}
+@if (!Model.Any())
+{
+    <p><br>You don't have any products registered yet!</p>
+}
+else
+{
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Book.Description)</th>
+                <th>@Html.DisplayNameFor(model => model.Book.Categories)</th>
+                <th>@Html.DisplayNameFor(model => model.Book.Quantity)</th>
+                <th>@Html.DisplayNameFor(model => model.Book.ReleaseYear)</th>
+                <th>@Html.DisplayNameFor(model => model.Book.Author)</th>
+                @if (UserAccess.IsAdmin(customer))
+                {
+                    <th class="col-lg-1"></th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var m in Model)
+            {
+                <tr>
+                    @if (UserAccess.IsAdmin(customer))
+                    {
+                        <td>@Html.ActionLink(m.Book.Description, "Edit", "Books", new { id = m.Book.Id }, null)</td>
+                    }
+                    else
+                    {
+                        <td>@m.Book.Description</td>
+                    }
+                    <td>
+                        @if (m.CategoriesList != null)
+                        {
+                            @string.Join(",", m.CategoriesList.Select(c => c.Text).ToList())
+                        }
+                    </td>
+                    <td>@m.Book.Quantity</td>
+                    <td>@m.Book.ReleaseYear</td>
+                    <td>@m.Book.Author?.Name</td>
+                    @if (UserAccess.IsAdmin(customer))
+                    {
+                        <td>@Html.ActionLink("Delete", "Delete", "Books", new { id = m.Book.Id }, new { @class = "btn btn-delete btn-primary", id = "btn-delete" })</td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+

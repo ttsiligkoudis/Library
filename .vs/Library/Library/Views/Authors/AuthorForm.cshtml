@@ -1,0 +1,34 @@
+﻿@model Author
+
+@{
+    ViewBag.Title = "Author";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm("Save", "Authors"))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.Name)
+        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Name)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Age)
+        @Html.TextBoxFor(m => m.Age, new { @class = "form-control", type = "number"})
+        @Html.ValidationMessageFor(m => m.Age)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.BirthPlace)
+        @Html.TextBoxFor(m => m.BirthPlace, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.BirthPlace)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.BooksReleased)
+        @Html.TextBoxFor(m => m.BooksReleased, new { @class = "form-control", type = "number"})
+        @Html.ValidationMessageFor(m => m.BooksReleased)
+    </div>
+    @Html.HiddenFor(m => m.Id)
+    <button type="submit" class="btn btn-primary">Save</button>
+}

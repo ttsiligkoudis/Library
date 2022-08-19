@@ -1,0 +1,71 @@
+﻿@model Library.ViewModels.RentalViewModel
+@using Library.Helpers
+@using ISession = Library.Helpers.ISession
+@inject ISession Session
+@inject IUserAccess UserAccess
+@{
+    ViewBag.Title = "Create Rental";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var customer = Session.GetCustomer();
+}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+<h2>@ViewBag.Title</h2>
+@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+@using (Html.BeginForm("Save", "Rentals"))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.SelectedBooks)
+        <select asp-for="@Model.SelectedBooks" class="form-control selectpicker" multiple asp-items="Model.Books.ConvertAll(p => new SelectListItem { Value = p.Id.ToString(), Text = p.Description })">
+            <option disabled value="">Please select</option>
+        </select>
+        @Html.ValidationMessageFor(m => m.SelectedBooks)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Rental.Customer)
+
+        @if (UserAccess.IsCustomer(customer))
+        {
+            if (!UserAccess.IsAdmin(customer))
+            {
+                <p>@Model.Rental.Customer?.Name</p>
+            }
+            else
+            {
+                <select asp-for="@Model.Rental.CustomerId" class="form-control" asp-items="Model.Customers.ConvertAll(p => new SelectListItem { Value = p.Id.ToString(), Text = p.Name })">
+                    <option disabled value="">Please select</option>
+                </select>
+                @Html.ValidationMessageFor(m => m.Rental.CustomerId)
+            }
+        }
+        else
+        {
+            <div class="form-group">
+                @Html.LabelFor(m => m.Rental.Customer.Name)
+                @Html.TextBoxFor(m => m.Rental.Customer.Name, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Rental.Customer.Name)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Rental.Customer.Age)
+                @Html.TextBoxFor(m => m.Rental.Customer.Age, new { @class = "form-control", type = "number"})
+                @Html.ValidationMessageFor(m => m.Rental.Customer.Age)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Rental.Customer.Address)
+                @Html.TextBoxFor(m => m.Rental.Customer.Address, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Rental.Customer.Address)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Rental.Customer.Email)
+                @Html.TextBoxFor(m => m.Rental.Customer.Email, new { @class = "form-control", type = "email" })
+                @Html.ValidationMessageFor(m => m.Rental.Customer.Email)
+            </div>
+        }
+    </div>
+    @Html.HiddenFor(m => m.Rental.CustomerId)
+    @Html.HiddenFor(m => m.Books)
+    @Html.HiddenFor(m => m.Customers)
+    <button type="submit" class="btn btn-primary">Save</button>
+}

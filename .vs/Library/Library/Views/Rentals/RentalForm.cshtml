@@ -1,0 +1,35 @@
+﻿@model Library.Models.Rental
+
+@{
+    ViewBag.Title = "Rental";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+<h3>@Model.Customer.Name</h3>
+@if (!Model.Returned)
+{
+    @Html.ActionLink("Return this Book", "ReturnRental", new { id = Model.Id }, new { @class = "btn btn-primary" })
+}
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>@Html.LabelFor(m => m.Book.Description)</th>
+            <th>@Html.LabelFor(m => m.RentDate)</th>
+            @if (Model.Returned)
+            {
+                <th>@Html.LabelFor(m => m.ReturnDate)</th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>@Model.Book.Description</td>
+            <td>@Model.RentDate</td>
+            @if (Model.Returned)
+            {
+                <td>@Model.ReturnDate</td>
+            }
+        </tr>
+    </tbody>
+</table>

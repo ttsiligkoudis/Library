@@ -1,0 +1,51 @@
+﻿@using Library.Helpers
+@model Library.Models.Customer
+@inject ISession Session
+@inject IUserAccess UserAccess
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var customer = Session.GetCustomer();
+}
+
+<h2>@ViewBag.Title</h2>
+@if (UserAccess.IsAdmin(customer) && !UserAccess.IsAdmin(customer))
+{
+    @Html.ActionLink("Convert to Admin", "ConvertToAdmin", new { id = Model.User.Id }, new { @class = "btn btn-primary" })
+}
+<div class="form-group">
+    @Html.LabelFor(m => m.Name, new { @class = "col-md-2 control-label" })
+    <div class="col-md-10">
+        @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @readonly = "readonly" })
+    </div>
+</div>
+<div class="form-group">
+    @Html.LabelFor(m => m.Age, new { @class = "col-md-2 control-label" })
+    <div class="col-md-10">
+        @Html.TextBoxFor(m => m.Age, new { @class = "form-control", @readonly = "readonly" })
+    </div>
+</div>
+<div class="form-group">
+    @Html.LabelFor(m => m.Address, new { @class = "col-md-2 control-label" })
+    <div class="col-md-10">
+        @Html.TextBoxFor(m => m.Address, new { @class = "form-control", @readonly = "readonly" })
+    </div>
+</div>
+<div class="form-group">
+    @Html.LabelFor(m => m.User.Email, new { @class = "col-md-2 control-label" })
+    <div class="col-md-10">
+        @Html.TextBoxFor(m => m.User.Email, new { @class = "form-control", @readonly = "readonly" })
+    </div>
+</div>
+<div class="form-group">
+    @Html.LabelFor(m => m.User.RegDate, new { @class = "col-md-2 control-label" })
+    <div class="col-md-10">
+        @Html.TextBoxFor(m => m.User.RegDate, new { @class = "form-control", @readonly = "readonly" })
+    </div>
+</div>
+<div class="form-group">
+    @Html.LabelFor(m => m.User.LoginDate, new { @class = "col-md-2 control-label" })
+    <div class="col-md-10">
+        @Html.TextBoxFor(m => m.User.LoginDate, new { @class = "form-control", @readonly = "readonly" })
+    </div>
+</div>

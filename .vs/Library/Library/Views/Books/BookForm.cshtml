@@ -1,0 +1,45 @@
+﻿@using Library.Helpers
+@model Library.ViewModels.BookViewModel
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+@{
+    ViewBag.Title = "Book";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm("Save", "Books"))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.Book.Description)
+        @Html.TextBoxFor(m => m.Book.Description, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Book.Description)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.SelectedCategories)
+        <select asp-for="@Model.SelectedCategories" class="form-control selectpicker" multiple asp-items="Model.CategoriesList.ConvertAll(p => new SelectListItem { Value = p.Value, Text = p.Text, Selected = p.Selected})">
+            <option disabled="disabled" value="">Please select</option>
+        </select>
+        @Html.ValidationMessageFor(m => m.SelectedCategories)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Book.Quantity)
+        @Html.TextBoxFor(m => m.Book.Quantity, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Book.Quantity)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Book.ReleaseYear)
+        @Html.TextBoxFor(m => m.Book.ReleaseYear, new { @class = "form-control", type = "number"})
+        @Html.ValidationMessageFor(m => m.Book.ReleaseYear)
+    </div>
+    <div class="form-group">
+        <select asp-for="@Model.Book.AuthorId" class="form-control" asp-items="Model.Authors.ToList().ConvertAll(p => new SelectListItem { Value = p.Id.ToString(), Text = p.Name })">
+            <option selected="selected" value="-1">Please select</option>
+        </select>
+        @Html.ValidationMessageFor(m => m.Book.AuthorId)
+    </div>
+    @Html.HiddenFor(m => m.Book.Id)
+    <button type="submit" class="btn btn-primary">Save</button>
+}
