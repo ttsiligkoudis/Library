@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "wqG09c5S94EtXnQnXooO3pD7zJXiq02xZK96aszGISn/MPWoeG6AyOpZhEX539mzENQILw4YHzRYUz6q6mnLzQ==",
+  "dgSpecHash": "rLw9xVVyVQGaBLiHsjeQVDoq/WHqf/Cp9GvSRax9NNjlZW/CJHkfOTY/wx0goSzXf6mHyR62Ah/qlYVLaYuVSw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\ttsil.VERTITECH\\Desktop\\Library\\Library\\Library.csproj",
+  "projectFilePath": "C:\\Users\\ttsil.VERTITECH\\Documents\\GitHub\\Library\\.vs\\Library\\Library\\Library.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ttsil.VERTITECH\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\ttsil.VERTITECH\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
