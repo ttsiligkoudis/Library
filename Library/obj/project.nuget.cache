@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "8vK0qcHLvFLtQstzFE+onMq90I7cVuFxrwP7cS9WOW8azF+zWw4tQfcjxvGwlOUo2Mn+x5t9I6EK7ejwS+xLog==",
+  "dgSpecHash": "IuKarPh4aSUyU/PORQv9cr+WjujDM2w1fDSxbWgjswBgHXHY7j6Ka8dTeDF/aS/akVwKZuqqs6PoqX6ZvC7r6Q==",
   "success": true,
-  "projectFilePath": "C:\\github\\Library\\.vs\\Library\\Library\\Library.csproj",
+  "projectFilePath": "C:\\github\\Library\\Library\\Library.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ThemisTsiligkoudis\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\ThemisTsiligkoudis\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",

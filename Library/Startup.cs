@@ -82,7 +82,7 @@ namespace Library
             services.AddHttpClient("myServiceClient")
                 .ConfigureHttpClient(client =>
                 {
-                    client.BaseAddress = new Uri("https://localhost:44384/api");
+                    client.BaseAddress = new Uri("https://localhost:5021/api");
                     client.Timeout = TimeSpan.FromSeconds(5);
                 })
                 .ConfigurePrimaryHttpMessageHandler(

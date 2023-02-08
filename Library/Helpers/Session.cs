@@ -6,8 +6,6 @@ namespace Library.Helpers
 {
     public class Session : ISession
     {
-        public User User { get; set; }
-        public Customer Customer { get; set; }
         public IHttpContextAccessor HttpContextAccessor;
 
         public Session(IHttpContextAccessor httpContextAccessor)
@@ -19,12 +17,7 @@ namespace Library.Helpers
         {
             var customerStr = HttpContextAccessor.HttpContext?.Session.GetString("Customer");
 
-            if (!string.IsNullOrEmpty(customerStr))
-            {
-                Customer = DeserializeObject<Customer>(customerStr)!;
-            }
-
-            return Customer;
+            return !string.IsNullOrEmpty(customerStr) ? DeserializeObject<Customer>(customerStr) : null;
         }
     }
 }

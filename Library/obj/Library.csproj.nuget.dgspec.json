@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\github\\Library\\.vs\\Library\\Library\\Library.csproj": {}
+    "C:\\github\\Library\\Library\\Library.csproj": {}
   },
   "projects": {
-    "C:\\github\\Library\\.vs\\Library\\Library\\Library.csproj": {
+    "C:\\github\\Library\\Library\\Library.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\github\\Library\\.vs\\Library\\Library\\Library.csproj",
+        "projectUniqueName": "C:\\github\\Library\\Library\\Library.csproj",
         "projectName": "Library",
-        "projectPath": "C:\\github\\Library\\.vs\\Library\\Library\\Library.csproj",
+        "projectPath": "C:\\github\\Library\\Library\\Library.csproj",
         "packagesPath": "C:\\Users\\ThemisTsiligkoudis\\.nuget\\packages\\",
-        "outputPath": "C:\\github\\Library\\.vs\\Library\\Library\\obj\\",
+        "outputPath": "C:\\github\\Library\\Library\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -84,7 +84,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }

@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121.
+-->
+<Project>
+  <PropertyGroup>
+    <_PublishTargetUrl>C:\github\Library\Library\bin\Release\net6.0\publish\</_PublishTargetUrl>
+    <History>True|2023-02-08T11:24:42.4706354Z;True|2023-02-08T13:23:57.0564343+02:00;True|2023-02-07T15:15:11.3477549+02:00;True|2023-02-07T14:40:39.0077388+02:00;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+</Project>

@@ -67,7 +67,7 @@
             <ul class="nav navbar-nav navbar-right">
                 @*@if (UserAccess.IsAdmin(customer))
                 {
-                    <li><a href="https://localhost:44384/swagger/">ConsumerAPI</a></li>
+                    <li><a href="https://localhost:5021/swagger/">ConsumerAPI</a></li>
                 }*@
                 <li>@Html.ActionLink("About us", "About", "Home")</li>
                 <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
@@ -79,7 +79,7 @@
     @RenderBody()
     <hr />
     <footer>
-        <p>&copy; @DateTime.Now.Year - EShop</p>
+        <p>&copy; @DateTime.Now.Year - Library</p>
     </footer>
 </div>
     
